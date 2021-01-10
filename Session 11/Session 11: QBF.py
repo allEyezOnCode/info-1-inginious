@@ -1,31 +1,28 @@
 def remove(self, cargo):
     node = self.first()
-    if node is not None:
-        if node.value() == cargo:
-            if self.__first == self.__last:
-                self.__first = None
-                self.__last = None
-                return None
-            else:
-                self.__first = node.next()
+    prev = None
+    while node != self.last() and node.value() != cargo:
+        prev = node
+        node = node.next()
+        
+    if node is not None and node.value() == cargo:
+        if prev is not None:
+            if self.last() == node:
+                self.__last = prev
+            prev.set_next(None)
             node.set_next(None)
             return node
-        current = self.first()
-        while current.next() is not self.first():
-            if current.next().value()==cargo:
-                if current.next() is self.last():
-                    self.__last=current
-                    self.__last.set_next(self.first())
-                    return node
-                current.set_next(current.next().next())
+        else:
+            if self.first() == self.last():
+                self.__first = None
+                self.__last = None
+                node.set_next(None)
                 return node
-            current = current.next()
-            return None
-
+            else:
+                self.__first = self.first().next()
+                node.set_next(None)
+                return node
+            
 def removeAll(self, cargo):
-    v = self.remove(cargo)
-    while v is not None:
-        v = self.remove(cargo)
-    
-                
-    
+    while self.remove(cargo) is not None:
+        pass
