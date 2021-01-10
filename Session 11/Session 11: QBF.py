@@ -9,7 +9,7 @@ def remove(self, cargo):
         if prev is not None:
             if self.last() == node:
                 self.__last = prev
-            prev.set_next(None)
+            prev.set_next(node.next())
             node.set_next(None)
             return node
         else:
